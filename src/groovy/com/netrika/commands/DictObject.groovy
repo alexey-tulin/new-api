@@ -1,4 +1,4 @@
-package com.netrika.api.entity
+package com.netrika.commands
 
 class DictObject {
 

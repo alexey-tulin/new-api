@@ -1,5 +1,8 @@
 package com.netrika.api.entity
 
+import com.netrika.commands.DictObject
+import com.netrika.commands.DictionaryType
+
 class EducationController {
 
     static responseFormats = ['json']
@@ -44,8 +47,30 @@ class EducationController {
 
         def educationStatuses = [
                 new DictObject(id: educationStatuseTrue,  title: 'Обучается'),
-                new DictObject(id: new Integer(2), title: 'Не обучается')]
+                new DictObject(id: educationStatuseFalse, title: 'Не обучается')]
 
         respond educationStatuses
+    }
+
+    /**
+     * Получение списка возможных форм обучения.
+     * url: /education/forms/
+     **/
+    def forms() {
+
+        def criteria = Dictionaries.createCriteria()
+        def forms = criteria.list(){
+
+            eq('dtype', DictionaryType.educationForms.value)
+            not {'in'('dcode',['1', '2'])}
+
+        }.collect {
+            [
+                    id   : it.dcode,
+                    title: it.dvalue
+            ]
+        }
+
+        respond forms
     }
 }
