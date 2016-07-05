@@ -6,11 +6,11 @@ class EducationController {
     static allowedMethods = [index: "GET"]
 
     /**
-     * Получение списка возможных направлений.
+     * РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РІРѕР·РјРѕР¶РЅС‹С… РЅР°РїСЂР°РІР»РµРЅРёР№.
      * url: /education/fields/
      *
      * parameters expected in the args:
-     * educationLevel (Integer) -- Идентификатор уровня образования
+     * educationLevel (Integer) -- РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СѓСЂРѕРІРЅСЏ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ
      **/
     def fields() {
         def Integer educationLevel = params.educationLevel as Integer
@@ -33,7 +33,19 @@ class EducationController {
         respond fields
     }
 
+    /**
+     * РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РІРѕР·РјРѕР¶РЅС‹С… СЃС‚Р°С‚СѓСЃРѕРІ РѕР±СѓС‡Р°СЋС‰РёС…СЃСЏ.
+     * url: /education/statuses/
+     **/
     def statuses() {
 
+        def int educationStatuseTrue = 1
+        def int educationStatuseFalse = 2
+
+        def educationStatuses = [
+                new DictObject(id: educationStatuseTrue,  title: 'РћР±СѓС‡Р°РµС‚СЃСЏ'),
+                new DictObject(id: new Integer(2), title: 'РќРµ РѕР±СѓС‡Р°РµС‚СЃСЏ')]
+
+        respond educationStatuses
     }
 }
