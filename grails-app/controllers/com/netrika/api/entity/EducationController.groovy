@@ -20,8 +20,7 @@ class EducationController {
         def Integer educationLevel = params.educationLevel as Integer
         Integer elvl = DictionariesSpecialtyVo.getElvlByLevel(educationLevel)
         Integer qlvl = DictionariesSpecialtyVo.getQlvlByLevel(educationLevel)
-        def criteria = DictionariesSpecialtyVo.createCriteria()
-        def fields = criteria.list(elvl: elvl, qlvl: qlvl){
+        def fields = DictionariesSpecialtyVo.createCriteria().list {
             isNotNull('codeEducation')
             if (elvl != 0) {
                 eq('elvl', elvl)
@@ -29,13 +28,15 @@ class EducationController {
             if (qlvl != 0) {
                 eq('qlvl', qlvl)
             }
-            projections {
-                distinct('codeEducation')
+            projections{
+                groupProperty "codeEducation"
+                groupProperty "education"
             }
+
         }.collect {
             [
-                    id   : it.id, // it.codeEducation, // todo в оригинальном api всегда возвращается 0 (так как мапить можно либо id либо num). в описании - должен возвращаться int
-                    title: it.codeEducation + ': ' + it.education
+                    id   : 0, // it.codeEducation, // todo в оригинальном api всегда возвращается 0 (так как мапить можно либо id либо num). в описании - должен возвращаться int
+                    title: it[0] + ': ' + it[1]
             ]
         }
         respond fields
@@ -71,7 +72,7 @@ class EducationController {
             }
         }.collect {
             [
-                    id   : it.id, //it.code, // todo в оригинальном api всегда возвращается 0. в описании - должен возвращаться int,
+                    id   : 0, //it.code, // todo в оригинальном api всегда возвращается 0. в описании - должен возвращаться int,
                     title: it.education+': '+it.qualifying
             ]
         }
