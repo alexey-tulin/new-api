@@ -7,6 +7,7 @@ package com.netrika.api.entity
  */
 class DictionariesSpecialtyVo {
 
+    Long id
     String sg; // Код укрупненные группы специальностей и направлений подготовки.
     String td; // Код направление подготовки.
     String sp; // Код специальности.

@@ -5,6 +5,7 @@ package com.netrika.api.entity
  */
 class Dictionaries {
 
+    Long id
     String dtype
     String dcode
     String dvalue
