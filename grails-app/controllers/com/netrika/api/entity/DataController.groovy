@@ -11,7 +11,7 @@ class DataController {
      * Получение справочника направлений записей о движении данных.
      * url: /data-directions/
      **/
-    def dataDirections() {
+    def directions() {
         respond grailsApplication.config.netrika.dataDirections;
     }
 
@@ -19,7 +19,7 @@ class DataController {
      * Получение справочника источников записей о движении данных.
      * url: /data-sources/
      **/
-    def dataSources() {
+    def sources() {
         // todo комментраий с оригинала
         // TODO: Пока источниками данных являются регионы. Но в дальнейшем добавяться еще и ФОИВ'ы.
         // TODO: Пересмортеть способ хранения.
@@ -37,6 +37,22 @@ class DataController {
         }
 
         respond sources;
+    }
+
+    /**
+     * Получение справочника статусов записей о движении данных.
+     * url: /data-statuses/
+     **/
+    def statuses() {
+        respond grailsApplication.config.netrika.dataStatuses;
+    }
+
+    /**
+     * Получение справочника типов записей о движении данных.
+     * url: /data-types/
+     **/
+    def types() {
+        respond grailsApplication.config.netrika.dataTypes;
     }
 
 }
