@@ -9,6 +9,11 @@ class UrlMappings {
             }
         }
 
+        "/api/v1/$action?/$id?(.${format})?"(controller: 'dictionary')
+        "/api/v1/disability-types/$id?(.${format})?"(controller: 'dictionary', action: "disabilityTypes")
+        "/api/v1/ownership-types/$id?(.${format})?"(controller: 'dictionary', action: "ownershipTypes")
+
+
         "/"(view: "/index")
         "500"(controller: "errors", action: "unknownError",
                 exception: Throwable)

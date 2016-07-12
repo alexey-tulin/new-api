@@ -11,6 +11,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+//grails.config.locations = [DictionaryConfig]
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -115,3 +117,45 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+netrika{
+    educationStatuses = [
+            ['id': 1, 'title': 'Обучается'],
+            ['id': 2, 'title': 'Не обучается']
+    ]
+
+    citizenships = [
+            ['id': 0, 'title': 'Гражданин Российской Федерации'],
+            ['id': 1, 'title': 'Иностранный гражданин'],
+            ['id': 2, 'title': 'Лицо без гражданства'],
+            ['id': 3, 'title': 'Гражданин Российской Федерации и иностранного государства (двойное гражданство)']
+    ]
+
+    genders = [
+            ['id': 1, 'title': 'Мужской'],
+            ['id': 2, 'title': 'Женский']
+    ]
+
+    /**
+     * Значения и коды «Справочника форм собственности» согласно
+     * классификатору форм собственности (ОКФС) ОК 027-99
+     */
+    ownershipTypes = [
+            ['id':10, 'title': 'РОССИЙСКАЯ СОБСТВЕННОСТЬ'],
+            ['id':11, 'title': 'Государственная собственность'],
+            ['id':12, 'title': 'Федеральная собственность'],
+            ['id':13, 'title': 'Собственность субъектов Российской Федерации'],
+            ['id':14, 'title': 'Муниципальная собственность'],
+            ['id':15, 'title': 'Собственность общественных и религиозных организаций (объединений)'],
+            ['id':16, 'title': 'Частная собственность'],
+            ['id':17, 'title': 'Смешанная российская собственность'],
+            ['id':18, 'title': 'Собственность российских граждан, постоянно проживающих за границей'],
+            ['id':19, 'title': 'Собственность потребительской кооперации'],
+            ['id':50, 'title': 'Собственность благотворительных организаций'],
+            ['id':51, 'title': 'Собственность политических общественных объединений'],
+            ['id':52, 'title': 'Собственность профессиональных союзов'],
+            ['id':53, 'title': 'Собственность общественных объединений'],
+            ['id':54, 'title': 'Собственность религиозных объединений']
+    ]
+}
+

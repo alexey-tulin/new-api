@@ -1,13 +1,14 @@
 package com.netrika.api.entity
 
 import com.google.common.base.Strings
-import com.netrika.commands.DictObject
 import com.netrika.commands.DictionaryType
 
 class EducationController {
 
     static responseFormats = ['json']
     static allowedMethods = [index: "GET"]
+
+    def grailsApplication;
 
     /**
      * Получение списка возможных направлений.
@@ -84,15 +85,7 @@ class EducationController {
      * url: /education/statuses/
      **/
     def statuses() {
-
-        def int educationStatuseTrue = 1
-        def int educationStatuseFalse = 2
-
-        def educationStatuses = [
-                new DictObject(id: educationStatuseTrue,  title: 'Обучается'),
-                new DictObject(id: educationStatuseFalse, title: 'Не обучается')]
-
-        respond educationStatuses
+        respond grailsApplication.config.netrika.educationStatuses;
     }
 
     /**
