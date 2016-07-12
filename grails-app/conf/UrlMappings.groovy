@@ -12,6 +12,8 @@ class UrlMappings {
         "/api/v1/$action?/$id?(.${format})?"(controller: 'dictionary')
         "/api/v1/disability-types/$id?(.${format})?"(controller: 'dictionary', action: "disabilityTypes")
         "/api/v1/ownership-types/$id?(.${format})?"(controller: 'dictionary', action: "ownershipTypes")
+        "/api/v1/data-directions/$id?(.${format})?"(controller: 'data', action: "dataDirections")
+        "/api/v1/data-sources/$id?(.${format})?"(controller: 'data', action: "dataSources")
 
 
         "/"(view: "/index")
