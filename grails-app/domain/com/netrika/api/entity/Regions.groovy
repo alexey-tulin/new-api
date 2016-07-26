@@ -1,5 +1,7 @@
 package com.netrika.api.entity
 
+import com.netrika.commands.DictObject
+
 /**
  * Справочник регионов и Федеральных округов РФ
  */
@@ -21,5 +23,9 @@ class Regions {
         foId column: "fo_id"
         foTitle column: "fo_title"
         version false
+    }
+
+    public DictObject asDictObject() {
+        return new DictObject(id: id, title: regionTitle)
     }
 }
