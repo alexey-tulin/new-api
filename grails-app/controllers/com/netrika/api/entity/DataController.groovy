@@ -1,6 +1,7 @@
 package com.netrika.api.entity
 
 import com.netrika.commands.ContentInfo
+import com.netrika.exceptions.ApplicationException
 
 class DataController {
 
@@ -82,19 +83,30 @@ class DataController {
 
         def Long id = params.id as Long
 
+        if (!id) {
+            if (!params.page) {
+                throw new ApplicationException('paging.not.found')
+            }
+            if (!params.perPage) {
+                throw new ApplicationException('paging.not.found')
+            }
+        }
+
         def Long search = params.search as Long
         def Integer status = params.status as Integer
         def Integer source = params.source as Integer
         def Integer type = params.type as Integer
-        def String direction = params.direction as String
-        def String dateFrom = params.dateFrom as String
-        def String dateTo = params.dateTo as String
+        def Integer direction = params.direction as Integer
+        def Date dateFrom = params.dateFrom as Date
+        def Date dateTo = params.dateTo as Date
         def String sortBy = params.sortBy as String
-        def String perPage = params.perPage as String
-        def String page = params.page as String
+        def Integer perPage = params.perPage as Integer
+        def Integer page = params.page as Integer
+
+        def int requestDataDirections = 1
 
         def criteria = Requests.createCriteria()
-        def requestsList = criteria.list(){
+        def requestsList = criteria.list(max: perPage, offset: page){
 
             if (id) {
                 eq('packageId', id)
@@ -108,20 +120,35 @@ class DataController {
                 eq('status', status)
             }
             if (source) {
-                eq('regionCode', source);
+                eq('regionCode', source)
             }
 
             if (type) {
                 def method = grailsApplication.config.netrika.dataTypesMap.find {def item -> item.value.id == type}
                 if (method) {
-                    eq('action', method.key);
+                    eq('action', method.key)
                 }
             }
 
-//            if ( direction && _(dicts.dataDirections).has(direction) ) {
-//                where.isRequest = ( direction == dicts.requestDataDirections ) ? true : false
-//            }
-//todo
+            if (direction && grailsApplication.config.netrika.dataDirections.find {def item -> item.id == direction} ) {
+                eq('isRequest', ( direction == requestDataDirections ) ? true : false);
+            }
+
+            // ## todo протестить
+            if ( dateFrom && dateTo ) {
+                and (
+                        gte('modifiedAt', dateFrom),
+                        lte('modifiedAt', dateTo)
+                )
+            } else if (dateFrom) {
+                gte('modifiedAt', dateFrom)
+            } else if (dateTo) {
+                lte('modifiedAt', dateTo)
+            }
+
+            order('modifiedAt', 'desc')
+//            firstResult(page)
+//            maxResults(perPage)
         }
 
         def result
@@ -136,7 +163,7 @@ class DataController {
         } else {
             // список объектов
             result = [
-                    count: requestsList.findAll().size(),
+                    count: requestsList.totalCount,
                     list:  requestsList.collect { toResponse(it)  }
             ]
         }
