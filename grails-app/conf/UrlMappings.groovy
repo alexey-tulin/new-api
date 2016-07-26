@@ -14,6 +14,7 @@ class UrlMappings {
 
         "/api/v1/disability-types/$id?(.${format})?"(controller: 'dictionary', action: "disabilityTypes")
         "/api/v1/ownership-types/$id?(.${format})?"(controller: 'dictionary', action: "ownershipTypes")
+        "/api/v1/parameters/$id?(.${format})?"(controller: 'dictionary', action: "parameters")
         "/api/v1/federal-districts/$id?(.${format})?"(controller: 'regions', action: "federalDistricts")
         "/api/v1/areàs/$id?(.${format})?"(controller: 'regions', action: "areàs")
         "/api/v1/data/$id?(.${format})?"(controller: 'data')

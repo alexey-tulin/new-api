@@ -2,6 +2,10 @@ package com.netrika.api.entity
 
 import com.netrika.commands.DictionaryType
 
+import java.nio.ByteBuffer
+import java.nio.charset.Charset
+import java.security.MessageDigest
+
 class DictionaryController {
 
     static responseFormats = ['json']
@@ -66,7 +70,40 @@ class DictionaryController {
      * url: /parameters/
      **/
     def parameters() {
-        // ## todo !!!
+
+        def fields = FieldChange.createCriteria().list {
+            projections{
+                groupProperty "fieldName"
+            }
+        }.collect {
+            def String field ->
+                //сгенерировать ид
+                // ## todo
+                // ---------------------------------
+                // из оригинала
+//                if ( !strip ) { strip = 4; }
+//                var crypto = require('crypto');
+//                var md5 = crypto.createHash('md5');
+//                var hex = md5.update(fieldName).digest('hex');
+//
+//                return parseInt(hex.slice(0, strip), 16);
+                // ---------------------------------
+
+                // попытка переписать
+//                MessageDigest md5 = MessageDigest.getInstance("MD5")
+//                def byte[] hex =field.getBytes(Charset.forName("UTF-8"))
+//                hex = md5.update(hex)
+//                hex = md5.digest(hex)
+//                hex = Arrays.copyOfRange(hex, 0, 4);
+//                def int intValue = ByteBuffer.wrap(hex).getInt();
+
+                [
+                        id   : 0,//Integer.parseInt("" + intValue, 16),
+                        title: field
+                ]
+        }
+
+        respond fields
     }
 
 
