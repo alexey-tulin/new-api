@@ -18,11 +18,26 @@ class OrganizationsController {
      * url: /organizations-statuses/
      **/
     def statuses() {
+        respond getDictionariesValues(DictionaryType.organizationsStatuses)
+    }
 
+    /**
+     * ѕолучение справочника типов организаций.
+     * url: /organizations-types/
+     **/
+    def types() {
+        respond getDictionariesValues(DictionaryType.organizationsTypes)
+    }
+
+
+
+    def index() {}
+
+    def getDictionariesValues(DictionaryType type) {
         def criteria = Dictionaries.createCriteria()
-        def statuses = criteria.list(){
+        def values = criteria.list(){
 
-            eq('dtype', DictionaryType.organizationsStatuses.value)
+            eq('dtype', type.value)
 
         }.collect {
             [
@@ -30,11 +45,6 @@ class OrganizationsController {
                     title: it.dvalue
             ]
         }
-
-        respond statuses
+        return values
     }
-
-
-
-    def index() {}
 }
