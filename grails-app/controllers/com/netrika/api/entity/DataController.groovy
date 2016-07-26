@@ -82,10 +82,10 @@ class DataController {
 
         def Long id = params.id as Long
 
-        def String search = params.search as String
-        def String status = params.status as String
-        def String source = params.source as String
-        def String type = params.type as String
+        def Long search = params.search as Long
+        def Integer status = params.status as Integer
+        def Integer source = params.source as Integer
+        def Integer type = params.type as Integer
         def String direction = params.direction as String
         def String dateFrom = params.dateFrom as String
         def String dateTo = params.dateTo as String
@@ -100,6 +100,27 @@ class DataController {
                 eq('packageId', id)
                 maxResults(1)
             }
+
+            if (search) {
+                eq('packageId', search)
+            }
+            if (status || status == 0) {
+                eq('status', status)
+            }
+            if (source) {
+                eq('regionCode', source);
+            }
+
+            if (type) {
+                def method = grailsApplication.config.netrika.dataTypesMap.find {def item -> item.value.id == type}
+                if (method) {
+                    eq('action', method.key);
+                }
+            }
+
+//            if ( direction && _(dicts.dataDirections).has(direction) ) {
+//                where.isRequest = ( direction == dicts.requestDataDirections ) ? true : false
+//            }
 //todo
         }
 
