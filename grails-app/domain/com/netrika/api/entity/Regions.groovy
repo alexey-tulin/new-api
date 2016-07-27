@@ -3,15 +3,15 @@ package com.netrika.api.entity
 import com.netrika.commands.DictObject
 
 /**
- * Справочник регионов и Федеральных округов РФ
+ * РЎРїСЂР°РІРѕС‡РЅРёРє СЂРµРіРёРѕРЅРѕРІ Рё Р¤РµРґРµСЂР°Р»СЊРЅС‹С… РѕРєСЂСѓРіРѕРІ Р Р¤
  */
 class Regions {
 
     Long id
-    String regionId //Код региона
-    String regionTitle //  Название региона.
-    Integer foId // Идентификатор Федерального округа.
-    String foTitle  // Название Федерального округа.
+    String regionId         // РљРѕРґ СЂРµРіРёРѕРЅР°
+    String regionTitle      // РќР°Р·РІР°РЅРёРµ СЂРµРіРёРѕРЅР°.
+    Integer foId            // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р¤РµРґРµСЂР°Р»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР°.
+    String foTitle          // РќР°Р·РІР°РЅРёРµ Р¤РµРґРµСЂР°Р»СЊРЅРѕРіРѕ РѕРєСЂСѓРіР°.
 
     static constraints = {
     }

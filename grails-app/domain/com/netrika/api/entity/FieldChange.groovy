@@ -3,14 +3,14 @@ package com.netrika.api.entity
 class FieldChange {
 
     Long id
-    Long entityType     // Тип сущности (таблица)
-    Long entityId       // Идентификатор сущности
-    String fieldName    // Наименования изменяемого поля
-    String oldValue     // Старое значение поля
-    String newValue     // Новое значение поля
-    String requestId    // Идентификатор запроса с изменением
-    String source       // Источник получения запроса с изменением
-    Date createDat      // Дата создания записи
+    Long entityType     // РўРёРї СЃСѓС‰РЅРѕСЃС‚Рё (С‚Р°Р±Р»РёС†Р°)
+    Long entityId       // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЃСѓС‰РЅРѕСЃС‚Рё
+    String fieldName    // РќР°РёРјРµРЅРѕРІР°РЅРёСЏ РёР·РјРµРЅСЏРµРјРѕРіРѕ РїРѕР»СЏ
+    String oldValue     // РЎС‚Р°СЂРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ
+    String newValue     // РќРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ
+    String requestId    // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РїСЂРѕСЃР° СЃ РёР·РјРµРЅРµРЅРёРµРј
+    String source       // РСЃС‚РѕС‡РЅРёРє РїРѕР»СѓС‡РµРЅРёСЏ Р·Р°РїСЂРѕСЃР° СЃ РёР·РјРµРЅРµРЅРёРµРј
+    Date createDat      // Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ Р·Р°РїРёСЃРё
 
     static mapping = {
         table "FIELDCHANGE"

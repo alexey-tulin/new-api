@@ -2,20 +2,20 @@ package com.netrika.api.entity
 
 class Requests {
 
-    Date  createdAt // Дата создания записи
-    String fileName // Имя файла с запросом
-    Integer status // Статус обработки
-    Date modifiedAt // Дата изменения
-    String path // Путь к файлу запроса
-    String id // UID запроса
-    Integer regionCode // Код региона
-    String action // Имя операции
-    Long packageId // Id пакета
-    String replyTo // Мнемоника источника запроса
-    Long fileSize // Размер  запроса в байтах
-    String processingLog  // Лог обработки
-    boolean isRequest // входящий/исходящий пакет
-    boolean isConsumer // отправляющая система - потребитель данных
+    Date  createdAt         // Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ Р·Р°РїРёСЃРё
+    String fileName         // РРјСЏ С„Р°Р№Р»Р° СЃ Р·Р°РїСЂРѕСЃРѕРј
+    Integer status          // РЎС‚Р°С‚СѓСЃ РѕР±СЂР°Р±РѕС‚РєРё
+    Date modifiedAt         // Р”Р°С‚Р° РёР·РјРµРЅРµРЅРёСЏ
+    String path             // РџСѓС‚СЊ Рє С„Р°Р№Р»Сѓ Р·Р°РїСЂРѕСЃР°
+    String id               // UID Р·Р°РїСЂРѕСЃР°
+    Integer regionCode      // РљРѕРґ СЂРµРіРёРѕРЅР°
+    String action           // РРјСЏ РѕРїРµСЂР°С†РёРё
+    Long packageId          // Id РїР°РєРµС‚Р°
+    String replyTo          // РњРЅРµРјРѕРЅРёРєР° РёСЃС‚РѕС‡РЅРёРєР° Р·Р°РїСЂРѕСЃР°
+    Long fileSize           // Р Р°Р·РјРµСЂ  Р·Р°РїСЂРѕСЃР° РІ Р±Р°Р№С‚Р°С…
+    String processingLog    // Р›РѕРі РѕР±СЂР°Р±РѕС‚РєРё
+    boolean isRequest       // РІС…РѕРґСЏС‰РёР№/РёСЃС…РѕРґСЏС‰РёР№ РїР°РєРµС‚
+    boolean isConsumer      // РѕС‚РїСЂР°РІР»СЏСЋС‰Р°СЏ СЃРёСЃС‚РµРјР° - РїРѕС‚СЂРµР±РёС‚РµР»СЊ РґР°РЅРЅС‹С…
 
     static constraints = {
     }
