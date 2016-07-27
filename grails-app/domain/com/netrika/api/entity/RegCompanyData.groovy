@@ -8,8 +8,8 @@ class RegCompanyData {
     Long shifts                     // Дополнительное наименование (на момент реорганизации)
     Long citizenship                // Гражданство (для индивидуальных предпринимателей)
     String headOrganization         // Головная организация
-    Long addressRegistration        // Юридический адрес
-    Long addressResidence           // Фактический адрес
+    Address addressRegistration     // Юридический адрес
+    Address addressResidence        // Фактический адрес
     String okato                    // Код ОКАТО
     String oktmo                    // Код ОКТМО
     String directorFio              // ФИО руководителя
@@ -42,7 +42,7 @@ class RegCompanyData {
     String organizationFedId        // Федеральный идентификатор организации
 
     static belongsTo = EducationProgramType
-    static hasMany = [programType:EducationProgramType]
+    static hasMany = [programTypes:EducationProgramType]
 
     static mapping = {
         table "REGCOMPANYDATA"
