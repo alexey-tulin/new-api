@@ -3,8 +3,8 @@ package com.netrika.api.entity
 class FieldChange {
 
     Long id
-    Long entityType     // Тип сущности (таблица)
-    Long entityId       // Идентификатор сущности
+    Integer entityType  // Тип сущности (таблица)
+    Integer entityId    // Идентификатор сущности
     String fieldName    // Наименования изменяемого поля
     String oldValue     // Старое значение поля
     String newValue     // Новое значение поля

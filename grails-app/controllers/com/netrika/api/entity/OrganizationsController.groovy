@@ -2,6 +2,7 @@ package com.netrika.api.entity
 
 import com.netrika.commands.DictObject
 import com.netrika.commands.DictionaryType
+import com.netrika.exceptions.ApplicationException
 
 /**
  * Получение списка организаций
@@ -57,6 +58,15 @@ class OrganizationsController {
 
         // QUERY PARAMS
         def Integer id = params.id as Integer
+
+        if (!id) {
+            if (!params.page) {
+                throw new ApplicationException('paging.not.found')
+            }
+            if (!params.perPage) {
+                throw new ApplicationException('paging.not.found')
+            }
+        }
 
         def String search = params.search as String
 
@@ -153,8 +163,9 @@ class OrganizationsController {
         ContactData contactData = ContactData.findById(it.id) // todo можно замапить в саму RegCompanyData
         DictObject organizationType = getDictionariesValue(DictionaryType.organizationsTypes, it.organizationType)
         DictObject citizenship = getDictionariesValue(DictionaryType.citizenships, it.citizenship)
-        DictObject organizationsStatuses = getDictionariesValue(DictionaryType.organizationsStatuses, it.workStatus)
+        DictObject organizationsStatuses = getDictionariesValue(DictionaryType.organizationsStatuses, it.workStatus ? Integer.parseInt(it.workStatus) : null)
         DictObject ownershipType = getDictionariesValue(DictionaryType.ownershipTypes, it.ownershipType)
+        DictObject typeByFounder = getDictionariesValue(DictionaryType.typeByFounder, it.typeByFounder)
         Regions region = Regions.findByRegionId(it.regCode)
 
         def response = [
@@ -168,8 +179,8 @@ class OrganizationsController {
                 // todo коммент с оригинала
                 // FIXME:String!!! must be int
                 head_id: it.headOrganization,
-                registrationAddress: it.addressRegistration.address,
-                actualAddress: it.addressResidence.address,
+                registrationAddress: it.addressRegistration ? it.addressRegistration.address : "",
+                actualAddress: it.addressRegistration ? it.addressResidence.address : "",
                 okato: it.okato,
                 oktmo: it.oktmo,
                 inn: it.inn,
@@ -181,10 +192,46 @@ class OrganizationsController {
                 email: contactData ? contactData.email : "",
                 phone: contactData ? contactData.phone : "",
                 status: organizationsStatuses,
+                // todo коммент с оригинала
                 // TODO: Найти и добавить дату и время изменения статуса организации.
                 statusChanged: "",
                 ownershipType: ownershipType,
-                // ## todo
+                accreditation: it.accreditationData,
+                license: it.licenseData,
+                industry: it.industry,
+                programs: it.programTypes.collect{
+                    program ->
+                        DictObject educationLevel = getDictionariesValue(DictionaryType.educationLevels, program.educationProgramKind)
+                        [
+                                id: null,
+                                type: [
+                                        id: program.id,
+                                        kind: educationLevel,
+                                        title: program.educationProgramName
+                                ],
+                                adaptationProgram: null,
+                                // id: parseInt(programData.adaptationprogram)
+                                // title: source._dict.adaptationProgram[programData.adaptationprogram] || ""
+                                focus: "",
+                                distance: "",
+                                document: "",
+                                sportOrArtType: "",
+                                durationInYears: null,
+                                durationInHours: null,
+                                profession: "",
+                                workerProfession: "",
+                                qualification: ""
+                        ]
+                },
+                typeByFounder: typeByFounder,
+                qualifications: it.qualifications,
+                constitution: it.constitution,
+                actualCount: it.actualCount,
+                maximumCount: it.maxCount,
+                belongToState: it.stateBelong,
+                latitude: Float.parseFloat(String.format('%s%s',59.894,it.id % 100)),  // NOTE: не найдено
+                longitude:  Float.parseFloat(String.format('%s%s',30.264,it.id % 101)) // NOTE: не найдено
+
         ]
         return response
     }
@@ -204,15 +251,16 @@ class OrganizationsController {
         return values
     }
 
-    def DictObject getDictionariesValue(DictionaryType type, String code) {
+    def DictObject getDictionariesValue(DictionaryType type, Integer code) {
 
         if (!code)
             return new DictObject(0,"")
+
         def criteria = Dictionaries.createCriteria()
         def values = criteria.list(){
 
             eq('dtype', type.value)
-            eq('dcode', code)
+            eq('dcode', '' + code)
 
         }
         return values ? new DictObject(code, values[0].dvalue) : new DictObject(0,"")

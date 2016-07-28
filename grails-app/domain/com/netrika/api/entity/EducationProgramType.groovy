@@ -2,7 +2,8 @@ package com.netrika.api.entity
 
 class EducationProgramType {
 
-    Long educationProgramKind       // Тип образовательной программы
+    Long id
+    Integer educationProgramKind    // Тип образовательной программы
     String educationProgramName     // Наименование образовательной программы
     Date createDat                  // Дата создания записи
     Long educationLevel             // Уровень образования
