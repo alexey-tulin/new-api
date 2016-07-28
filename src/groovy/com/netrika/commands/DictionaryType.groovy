@@ -11,6 +11,7 @@ enum DictionaryType {
     educationForms              ("4"),
     educationFormsRealization   ("5"),
     typeByFounder               ("6"),
+    ownershipTypes               ("7"), // todo значение 7 взято с тестовой БД
     workTime                    ("13"),
     shift                       ("14"),
     // : "15",
@@ -26,7 +27,8 @@ enum DictionaryType {
     educationLevels             ("25"),
     // : "26",
     // : "27",
-    tightSituation              ("28")
+    tightSituation              ("28"),
+    citizenships                ("30") // todo значение 30 взято с тестовой БД
 
 
     String value;
